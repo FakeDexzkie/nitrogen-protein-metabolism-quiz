@@ -1,0 +1,1183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nitrogen/Protein Metabolism Quiz</title>
+  <style>
+    :root {
+      --bg: #eef2f7;
+      --card: #ffffff;
+      --text: #172033;
+      --muted: #65728a;
+      --primary: #1d4ed8;
+      --primary-dark: #173ea8;
+      --correct: #0f8a4b;
+      --correct-bg: #e7f7ee;
+      --wrong: #c62828;
+      --wrong-bg: #fdeaea;
+      --border: #d8deea;
+      --shadow: 0 18px 40px rgba(23, 32, 51, 0.12);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at top left, rgba(29, 78, 216, 0.18), transparent 32rem),
+        var(--bg);
+      color: var(--text);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.5;
+    }
+
+    .app {
+      width: min(940px, 94vw);
+      margin: 36px auto;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 22px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(1.65rem, 3vw, 2.5rem);
+      letter-spacing: -0.03em;
+    }
+
+    .subtitle {
+      color: var(--muted);
+      margin-top: 8px;
+      font-size: 1rem;
+    }
+
+    .quiz-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      box-shadow: var(--shadow);
+      padding: clamp(18px, 4vw, 34px);
+    }
+
+    .top-row {
+      display: flex;
+      gap: 14px;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      margin-bottom: 18px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #f3f6fb;
+      color: var(--muted);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 8px 12px;
+      font-size: 0.92rem;
+      font-weight: 700;
+    }
+
+    .progress-wrap {
+      height: 12px;
+      background: #e4e9f2;
+      border-radius: 999px;
+      overflow: hidden;
+      margin-bottom: 24px;
+    }
+
+    .progress {
+      width: 0%;
+      height: 100%;
+      background: linear-gradient(90deg, var(--primary), #60a5fa);
+      transition: width 0.25s ease;
+    }
+
+    .question {
+      font-size: clamp(1.08rem, 2.2vw, 1.38rem);
+      font-weight: 800;
+      margin: 0 0 20px;
+    }
+
+    .choices {
+      display: grid;
+      gap: 12px;
+    }
+
+    .choice {
+      border: 2px solid var(--border);
+      border-radius: 15px;
+      padding: 14px 16px;
+      cursor: pointer;
+      display: grid;
+      grid-template-columns: 42px 1fr;
+      gap: 10px;
+      align-items: start;
+      background: #fff;
+      transition: transform 0.12s ease, border-color 0.12s ease, background 0.12s ease;
+      user-select: none;
+    }
+
+    .choice:hover {
+      transform: translateY(-1px);
+      border-color: #9ab0dc;
+    }
+
+    .choice input {
+      margin-top: 5px;
+      transform: scale(1.2);
+      accent-color: var(--primary);
+    }
+
+    .letter {
+      font-weight: 800;
+      color: var(--primary);
+    }
+
+    .choice.correct {
+      border-color: var(--correct);
+      background: var(--correct-bg);
+      font-weight: 800;
+    }
+
+    .choice.incorrect {
+      border-color: var(--wrong);
+      background: var(--wrong-bg);
+    }
+
+    .feedback {
+      margin-top: 20px;
+      padding: 16px;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      background: #f8fafc;
+      display: none;
+    }
+
+    .feedback.show { display: block; }
+
+    .feedback-title {
+      margin: 0 0 8px;
+      font-weight: 900;
+    }
+
+    .feedback.correct .feedback-title { color: var(--correct); }
+    .feedback.incorrect .feedback-title { color: var(--wrong); }
+
+    .explanation {
+      margin: 0;
+      color: #2f3b52;
+    }
+
+    .controls {
+      display: flex;
+      gap: 10px;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-top: 24px;
+    }
+
+    button {
+      border: none;
+      border-radius: 12px;
+      padding: 12px 17px;
+      font-weight: 800;
+      cursor: pointer;
+      background: var(--primary);
+      color: white;
+      font-size: 0.96rem;
+      transition: background 0.12s ease, transform 0.12s ease;
+    }
+
+    button:hover:not(:disabled) {
+      background: var(--primary-dark);
+      transform: translateY(-1px);
+    }
+
+    button:disabled {
+      opacity: 0.55;
+      cursor: not-allowed;
+    }
+
+    .secondary {
+      background: #e8edf7;
+      color: var(--text);
+    }
+
+    .secondary:hover:not(:disabled) {
+      background: #d9e2f2;
+    }
+
+    .score-box {
+      color: var(--muted);
+      font-weight: 800;
+    }
+
+    .result {
+      text-align: center;
+      padding: 26px 10px;
+      display: none;
+    }
+
+    .result.show { display: block; }
+
+    .result h2 {
+      font-size: clamp(1.6rem, 4vw, 2.2rem);
+      margin: 0 0 10px;
+    }
+
+    .result-score {
+      font-size: 1.25rem;
+      font-weight: 900;
+      color: var(--primary);
+      margin-bottom: 16px;
+    }
+
+    .review-list {
+      margin-top: 24px;
+      text-align: left;
+      display: grid;
+      gap: 14px;
+    }
+
+    .review-item {
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 14px;
+      background: #f8fafc;
+    }
+
+    .review-item strong {
+      color: var(--text);
+    }
+
+    @media (max-width: 560px) {
+      .choice {
+        grid-template-columns: 32px 1fr;
+        padding: 13px;
+      }
+
+      .controls {
+        align-items: stretch;
+      }
+
+      .controls button {
+        width: 100%;
+      }
+
+      .score-box {
+        width: 100%;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="app">
+    <header>
+      <h1>Nitrogen/Protein Metabolism Quiz</h1>
+      <div class="subtitle">60-item multiple-choice quiz with immediate answer explanations</div>
+    </header>
+
+    <section class="quiz-card" id="quizCard">
+      <div id="quizArea">
+        <div class="top-row">
+          <div class="badge" id="questionBadge">Question 1 of 60</div>
+          <div class="badge" id="scoreBadge">Score: 0</div>
+        </div>
+        <div class="progress-wrap" aria-label="Progress">
+          <div class="progress" id="progressBar"></div>
+        </div>
+
+        <p class="question" id="questionText"></p>
+        <div class="choices" id="choices"></div>
+
+        <div class="feedback" id="feedback">
+          <p class="feedback-title" id="feedbackTitle"></p>
+          <p class="explanation" id="explanation"></p>
+        </div>
+
+        <div class="controls">
+          <button class="secondary" id="prevBtn">Previous</button>
+          <span class="score-box" id="answeredStatus">Answered: 0 / 60</span>
+          <button id="submitBtn">Submit Answer</button>
+          <button id="nextBtn" disabled>Next</button>
+        </div>
+      </div>
+
+      <div class="result" id="resultArea">
+        <h2>Quiz Completed</h2>
+        <div class="result-score" id="finalScore"></div>
+        <p id="finalMessage"></p>
+        <button id="restartBtn">Restart Quiz</button>
+        <div class="review-list" id="reviewList"></div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const questions = [
+  {
+    "q": "A patient consuming adequate calories but insufficient dietary protein develops edema and muscle wasting. Which biochemical explanation best accounts for the edema observed in this condition?",
+    "choices": {
+      "A": "Increased hepatic conversion of amino acid carbon skeletons to triacylglycerols",
+      "B": "Reduced synthesis of plasma proteins, particularly albumin, lowering oncotic pressure",
+      "C": "Increased ammonium excretion due to metabolic acidosis",
+      "D": "Excessive conversion of phenylalanine to tyrosine"
+    },
+    "answer": "B",
+    "explanation": "Kwashiorkor involves protein deficiency despite adequate calorie intake. Low availability of essential amino acids reduces synthesis of plasma proteins such as albumin, decreasing plasma oncotic pressure and causing fluid accumulation or edema."
+  },
+  {
+    "q": "Which statement best describes the primary metabolic fate of amino acids after absorption from dietary protein?",
+    "choices": {
+      "A": "They are stored directly as amino acid polymers for later use",
+      "B": "They enter cellular amino acid pools for protein synthesis, nitrogen-containing compound synthesis, or oxidation",
+      "C": "They are converted exclusively into glucose through gluconeogenesis",
+      "D": "They are transported directly to adipose tissue for conversion into triacylglycerols only"
+    },
+    "answer": "B",
+    "explanation": "Absorbed amino acids enter cellular amino acid pools, where they may be used to synthesize proteins, produce nitrogen-containing compounds, or be oxidized after removal of nitrogen."
+  },
+  {
+    "q": "Before amino acids can be oxidized for energy, which process must generally occur first?",
+    "choices": {
+      "A": "Conversion of carbon skeletons into urea",
+      "B": "Removal of nitrogen from the amino acid",
+      "C": "Condensation of amino acids into glycogen",
+      "D": "Direct conversion of amino acids into bile salts"
+    },
+    "answer": "B",
+    "explanation": "Amino acids contain nitrogen that must be removed before their carbon skeletons can be oxidized. The removed nitrogen forms ammonia, which is toxic and is converted to urea in the liver."
+  },
+  {
+    "q": "Which organ is the principal site for amino acid oxidation and conversion of toxic ammonia into urea?",
+    "choices": {
+      "A": "Kidney",
+      "B": "Liver",
+      "C": "Skeletal muscle",
+      "D": "Intestinal epithelium"
+    },
+    "answer": "B",
+    "explanation": "The liver is the main site of amino acid oxidation and the site of the urea cycle, which detoxifies ammonia by converting it to urea for urinary excretion."
+  },
+  {
+    "q": "Branched-chain amino acids are unusual because they can be significantly oxidized in which tissue?",
+    "choices": {
+      "A": "Skeletal muscle",
+      "B": "Red blood cells",
+      "C": "Adipose tissue",
+      "D": "Pancreatic acinar cells"
+    },
+    "answer": "A",
+    "explanation": "Unlike many amino acids that are mainly oxidized in the liver, branched-chain amino acids such as leucine, isoleucine, and valine can be oxidized significantly in skeletal muscle."
+  },
+  {
+    "q": "Under normal physiological conditions, which nitrogenous product accounts for approximately 90% of nitrogen excretion?",
+    "choices": {
+      "A": "Uric acid",
+      "B": "Creatinine",
+      "C": "Urea",
+      "D": "Ammonium ion"
+    },
+    "answer": "C",
+    "explanation": "Urea is the major nitrogenous waste product and accounts for about 90% of nitrogen excretion under normal conditions."
+  },
+  {
+    "q": "During metabolic acidosis, ammonium excretion increases primarily because the kidney uses ammonia to:",
+    "choices": {
+      "A": "Increase hepatic urea synthesis",
+      "B": "Bind excess protons in urine",
+      "C": "Convert alanine into glucose",
+      "D": "Activate pancreatic zymogens"
+    },
+    "answer": "B",
+    "explanation": "During acidosis, the kidney releases more ammonia, which binds excess hydrogen ions in urine to form ammonium, helping remove acid from the body."
+  },
+  {
+    "q": "Which of the following best represents a state of negative nitrogen balance?",
+    "choices": {
+      "A": "Nitrogen intake equals nitrogen excretion",
+      "B": "Nitrogen intake exceeds nitrogen excretion",
+      "C": "Nitrogen excretion exceeds nitrogen intake",
+      "D": "Nitrogen intake and protein synthesis both increase equally"
+    },
+    "answer": "C",
+    "explanation": "Negative nitrogen balance occurs when nitrogen excretion is greater than nitrogen intake, as seen in illness, starvation, or protein malnutrition."
+  },
+  {
+    "q": "Which physiological condition is most closely associated with positive nitrogen balance?",
+    "choices": {
+      "A": "Starvation",
+      "B": "Severe illness",
+      "C": "Pregnancy",
+      "D": "Chronic protein malnutrition"
+    },
+    "answer": "C",
+    "explanation": "Positive nitrogen balance occurs when nitrogen intake exceeds nitrogen excretion, commonly during growth, pregnancy, and recovery from illness."
+  },
+  {
+    "q": "Tyrosine is classified as non-essential in adults because it can be synthesized from which essential amino acid?",
+    "choices": {
+      "A": "Methionine",
+      "B": "Phenylalanine",
+      "C": "Threonine",
+      "D": "Tryptophan"
+    },
+    "answer": "B",
+    "explanation": "Tyrosine can be synthesized from the essential amino acid phenylalanine; therefore, it is not considered essential in adults when phenylalanine is adequate."
+  },
+  {
+    "q": "Cysteine synthesis is dependent on glucose-derived carbon skeletons but also requires sulfur from which essential amino acid?",
+    "choices": {
+      "A": "Lysine",
+      "B": "Histidine",
+      "C": "Methionine",
+      "D": "Valine"
+    },
+    "answer": "C",
+    "explanation": "Cysteine can be synthesized from glucose-derived carbon skeletons, but it requires sulfur donated by the essential amino acid methionine."
+  },
+  {
+    "q": "Which amino acid is considered essential during growth but not required as an essential amino acid in adults?",
+    "choices": {
+      "A": "Arginine",
+      "B": "Alanine",
+      "C": "Glutamine",
+      "D": "Glycine"
+    },
+    "answer": "A",
+    "explanation": "Arginine is conditionally essential during periods of growth but is not considered essential for healthy adults."
+  },
+  {
+    "q": "After removal of nitrogen, amino acid carbon skeletons may be converted into all of the following except:",
+    "choices": {
+      "A": "Pyruvate",
+      "B": "Acetyl CoA",
+      "C": "TCA cycle intermediates",
+      "D": "Urea nitrogen"
+    },
+    "answer": "D",
+    "explanation": "Amino acid carbon skeletons can become pyruvate, acetyl CoA, or TCA cycle intermediates. Urea nitrogen comes from the removed nitrogen, not from the carbon skeleton."
+  },
+  {
+    "q": "In the fed state, amino acids released from dietary proteins travel first through the hepatic portal vein to the liver, where excess carbon skeletons may be converted into:",
+    "choices": {
+      "A": "Glucose or triacylglycerols",
+      "B": "Ammonium or bilirubin",
+      "C": "Creatinine or uric acid",
+      "D": "Pepsinogen or trypsinogen"
+    },
+    "answer": "A",
+    "explanation": "In the fed state, excess amino acid carbon skeletons in the liver may be converted to glucose, glycogen, fatty acids, or triacylglycerols."
+  },
+  {
+    "q": "Which nitrogenous waste is primarily derived from purine breakdown?",
+    "choices": {
+      "A": "Creatinine",
+      "B": "Uric acid",
+      "C": "Bilirubin",
+      "D": "Ammonia"
+    },
+    "answer": "B",
+    "explanation": "Uric acid is produced from purine breakdown and is one of the major nitrogenous urinary excretory products."
+  },
+  {
+    "q": "Protein digestion begins in the stomach primarily through the action of which enzyme?",
+    "choices": {
+      "A": "Trypsin",
+      "B": "Pepsin",
+      "C": "Elastase",
+      "D": "Aminopeptidase"
+    },
+    "answer": "B",
+    "explanation": "Pepsin begins protein digestion in the stomach by breaking dietary proteins into smaller polypeptides."
+  },
+  {
+    "q": "Pepsinogen is secreted by chief cells and converted to pepsin mainly because of:",
+    "choices": {
+      "A": "Bicarbonate released by the pancreas",
+      "B": "Hydrochloric acid secreted by parietal cells",
+      "C": "Trypsin released from pancreatic zymogens",
+      "D": "Sodium-dependent amino acid transport"
+    },
+    "answer": "B",
+    "explanation": "Chief cells secrete pepsinogen, and hydrochloric acid from parietal cells lowers gastric pH, causing pepsinogen to become active pepsin."
+  },
+  {
+    "q": "Which statement best explains why gastric acid facilitates protein digestion?",
+    "choices": {
+      "A": "It converts amino acids into glucose",
+      "B": "It denatures dietary proteins, making peptide bonds more accessible",
+      "C": "It activates intestinal aminopeptidases in the brush border",
+      "D": "It directly transports amino acids into epithelial cells"
+    },
+    "answer": "B",
+    "explanation": "Gastric acid denatures dietary proteins, disrupting their structure and making peptide bonds more accessible to proteolytic enzymes."
+  },
+  {
+    "q": "Pepsin is best classified as a/an:",
+    "choices": {
+      "A": "Exopeptidase active at neutral pH",
+      "B": "Endopeptidase active at low pH",
+      "C": "Aminopeptidase active in the intestinal brush border",
+      "D": "Serosal transporter for amino acid release"
+    },
+    "answer": "B",
+    "explanation": "Pepsin is an endopeptidase that remains active in the acidic environment of the stomach."
+  },
+  {
+    "q": "Pepsin preferentially cleaves peptide bonds involving which type of amino acid residues?",
+    "choices": {
+      "A": "Branched-chain or sulfur-containing residues",
+      "B": "Aromatic or acidic residues",
+      "C": "Basic residues only",
+      "D": "Small side-chain residues only"
+    },
+    "answer": "B",
+    "explanation": "Pepsin preferentially cleaves peptide bonds involving aromatic or acidic amino acid residues."
+  },
+  {
+    "q": "Pancreatic proteases are secreted mainly as inactive zymogens in order to:",
+    "choices": {
+      "A": "Prevent premature digestion of pancreatic proteins",
+      "B": "Increase sodium absorption in the small intestine",
+      "C": "Promote direct absorption of intact proteins",
+      "D": "Convert ammonia into urea before intestinal absorption"
+    },
+    "answer": "A",
+    "explanation": "Proteases are secreted as inactive zymogens to prevent premature enzyme activity and protect the tissues that produce them from autodigestion."
+  },
+  {
+    "q": "Trypsinogen is activated to trypsin in the small intestine by:",
+    "choices": {
+      "A": "Pepsin",
+      "B": "Enteropeptidase",
+      "C": "Carboxypeptidase A",
+      "D": "Na⁺,K⁺-ATPase"
+    },
+    "answer": "B",
+    "explanation": "Enteropeptidase from intestinal cells cleaves trypsinogen to form active trypsin."
+  },
+  {
+    "q": "Trypsin plays a central role in intestinal protein digestion because it:",
+    "choices": {
+      "A": "Cleaves only amino acids from the amino terminal end",
+      "B": "Activates other pancreatic zymogens after its own activation",
+      "C": "Transports amino acids across the basolateral membrane",
+      "D": "Converts dietary protein directly into urea"
+    },
+    "answer": "B",
+    "explanation": "Once activated by enteropeptidase, trypsin activates other pancreatic zymogens such as chymotrypsinogen, proelastase, and procarboxypeptidases."
+  },
+  {
+    "q": "Which set includes the pancreatic serine endopeptidases involved in protein digestion?",
+    "choices": {
+      "A": "Trypsin, chymotrypsin, and elastase",
+      "B": "Pepsin, aminopeptidase, and cathepsin",
+      "C": "Carboxypeptidase A, carboxypeptidase B, and oxoprolinase",
+      "D": "Caspase, calpain, and proteasome"
+    },
+    "answer": "A",
+    "explanation": "Trypsin, chymotrypsin, and elastase are pancreatic serine endopeptidases that cleave internal peptide bonds."
+  },
+  {
+    "q": "Trypsin specifically cleaves peptide bonds after which amino acid residues?",
+    "choices": {
+      "A": "Alanine and glycine",
+      "B": "Lysine and arginine",
+      "C": "Phenylalanine and tyrosine",
+      "D": "Glutamate and aspartate"
+    },
+    "answer": "B",
+    "explanation": "Trypsin cleaves peptide bonds on the carboxyl side of basic amino acids, especially lysine and arginine."
+  },
+  {
+    "q": "Chymotrypsin preferentially cleaves peptide bonds involving:",
+    "choices": {
+      "A": "Hydrophobic residues",
+      "B": "Basic residues",
+      "C": "Acidic residues only",
+      "D": "Cystine residues"
+    },
+    "answer": "A",
+    "explanation": "Chymotrypsin preferentially cleaves peptide bonds near hydrophobic amino acid residues."
+  },
+  {
+    "q": "Elastase is most associated with cleavage near amino acids that have:",
+    "choices": {
+      "A": "Large aromatic side chains",
+      "B": "Small side chains such as alanine and glycine",
+      "C": "Positively charged side chains such as lysine",
+      "D": "Sulfur-containing side chains only"
+    },
+    "answer": "B",
+    "explanation": "Elastase cleaves peptide bonds involving small side-chain amino acids such as alanine and glycine."
+  },
+  {
+    "q": "Carboxypeptidases differ from trypsin, chymotrypsin, and elastase because carboxypeptidases:",
+    "choices": {
+      "A": "Remove amino acids from the carboxyl end of peptides",
+      "B": "Remove amino acids from the amino end of peptides",
+      "C": "Function only in lysosomes",
+      "D": "Require ubiquitin tagging before activation"
+    },
+    "answer": "A",
+    "explanation": "Carboxypeptidases are exopeptidases that remove amino acids from the carboxyl terminal end of peptides."
+  },
+  {
+    "q": "Which pairing is correctly matched?",
+    "choices": {
+      "A": "Carboxypeptidase A — basic amino acids such as lysine and arginine",
+      "B": "Carboxypeptidase B — hydrophobic amino acids",
+      "C": "Aminopeptidase — removal of amino acids from the amino end",
+      "D": "Pepsin — pancreatic protease activated by enteropeptidase"
+    },
+    "answer": "C",
+    "explanation": "Aminopeptidases remove amino acids from the amino terminal end of peptides. Carboxypeptidase A favors hydrophobic residues, while carboxypeptidase B targets basic residues."
+  },
+  {
+    "q": "Amino acids are absorbed from the intestinal lumen mainly through:",
+    "choices": {
+      "A": "Secondary active Na⁺-dependent transport systems and facilitated diffusion",
+      "B": "ATP-dependent proteasomal transport and pinocytosis only",
+      "C": "Urea cycle transporters and ammonia diffusion",
+      "D": "VLDL-mediated transport through the lymphatic system"
+    },
+    "answer": "A",
+    "explanation": "Amino acids are absorbed by secondary active sodium-dependent transporters and by facilitated diffusion transport systems."
+  },
+  {
+    "q": "The Na⁺-dependent cotransport of amino acids across the intestinal brush border is classified as secondary active transport because it:",
+    "choices": {
+      "A": "Directly hydrolyzes ATP at the apical membrane to move amino acids",
+      "B": "Uses the Na⁺ gradient maintained by Na⁺,K⁺-ATPase to drive amino acid uptake",
+      "C": "Requires ubiquitin tagging before amino acids can enter epithelial cells",
+      "D": "Depends on pancreatic bicarbonate to convert amino acids into peptides"
+    },
+    "answer": "B",
+    "explanation": "The cotransporter does not directly hydrolyze ATP. Instead, it uses the sodium gradient maintained by the basolateral Na⁺,K⁺-ATPase to bring amino acids into intestinal epithelial cells."
+  },
+  {
+    "q": "After amino acids enter intestinal epithelial cells, they are released toward the blood mainly through:",
+    "choices": {
+      "A": "Facilitated transport across the serosal membrane",
+      "B": "Pepsin-mediated cleavage at the basolateral surface",
+      "C": "ATP-dependent proteasomal export",
+      "D": "Conversion into glutathione before circulation"
+    },
+    "answer": "A",
+    "explanation": "After uptake into intestinal epithelial cells, amino acids leave across the serosal or basolateral membrane through facilitated transporters down their concentration gradient."
+  },
+  {
+    "q": "Which statement best describes the specificity of intestinal amino acid transport systems?",
+    "choices": {
+      "A": "Each amino acid uses only one highly specific transporter",
+      "B": "Most amino acids are absorbed by multiple overlapping transport systems",
+      "C": "Only essential amino acids require transporters",
+      "D": "Neutral amino acids are absorbed exclusively by passive diffusion"
+    },
+    "answer": "B",
+    "explanation": "The intestinal brush border contains multiple amino acid transporters with overlapping specificity, so most amino acids can be transported by more than one system."
+  },
+  {
+    "q": "Which group correctly represents one set of Na⁺-dependent transport categories found in the apical brush border?",
+    "choices": {
+      "A": "Neutral amino acids, acidic amino acids, basic amino acids/cystine, and proline/hydroxyproline",
+      "B": "Urea, bilirubin, creatinine, and uric acid",
+      "C": "Pepsinogen, trypsinogen, chymotrypsinogen, and proelastase",
+      "D": "Albumin, hemoglobin, collagen, and elastin"
+    },
+    "answer": "A",
+    "explanation": "Apical brush border transport categories include transporters for neutral amino acids, acidic amino acids, basic amino acids and cystine, and proline/hydroxyproline."
+  },
+  {
+    "q": "Compared with intestinal amino acid transporters, amino acid transporters in tissues such as liver and muscle:",
+    "choices": {
+      "A": "Are identical in genetic origin, structure, and specificity",
+      "B": "Are mostly glucose-dependent rather than sodium-dependent",
+      "C": "Differ in genetic origin, structure, and specificity and vary between tissues",
+      "D": "Function only during protein digestion"
+    },
+    "answer": "C",
+    "explanation": "Tissue amino acid transporters differ from intestinal transporters in genetic origin, structure, and specificity, and they can vary among tissues."
+  },
+  {
+    "q": "The N-system transporter for glutamine is described in the file as being specific to which tissue?",
+    "choices": {
+      "A": "Liver",
+      "B": "Kidney",
+      "C": "Skeletal muscle",
+      "D": "Red blood cell"
+    },
+    "answer": "A",
+    "explanation": "The file identifies the N-system transporter for glutamine as specific to the liver."
+  },
+  {
+    "q": "The intracellular amino acid pool is replenished mainly from:",
+    "choices": {
+      "A": "Dietary amino acids and degradation of endogenous proteins",
+      "B": "Urea hydrolysis and bilirubin recycling",
+      "C": "Glycogen breakdown and fatty acid β-oxidation",
+      "D": "Creatinine conversion and purine degradation"
+    },
+    "answer": "A",
+    "explanation": "The intracellular amino acid pool comes from absorbed dietary amino acids and from degradation or turnover of the body’s own proteins."
+  },
+  {
+    "q": "Which statement best describes protein turnover?",
+    "choices": {
+      "A": "Proteins are synthesized once and remain stable throughout the life of the organism",
+      "B": "Proteins are continuously synthesized and degraded at variable rates",
+      "C": "Only digestive proteins undergo regular degradation",
+      "D": "Protein turnover occurs only during starvation"
+    },
+    "answer": "B",
+    "explanation": "Protein turnover is the continuous synthesis and degradation of proteins. Different proteins have different half-lives, from minutes to days."
+  },
+  {
+    "q": "Which protein source is specifically mentioned as being degraded during fasting to provide amino acids for energy metabolism?",
+    "choices": {
+      "A": "Muscle proteins",
+      "B": "Serum albumin only",
+      "C": "Pancreatic bicarbonate transporters",
+      "D": "Intestinal Na⁺,K⁺-ATPase"
+    },
+    "answer": "A",
+    "explanation": "During fasting, muscle proteins are broken down, releasing amino acids that can be used for energy metabolism or gluconeogenesis."
+  },
+  {
+    "q": "Excess dietary protein beyond the body’s needs does not continually increase muscle mass because the excess is mainly:",
+    "choices": {
+      "A": "Converted to glycogen or fat for storage",
+      "B": "Stored unchanged as circulating amino acid polymers",
+      "C": "Excreted completely as intact protein in feces",
+      "D": "Converted directly into bilirubin"
+    },
+    "answer": "A",
+    "explanation": "Once protein requirements are met, excess amino acid carbon skeletons are converted to glycogen or fat rather than being stored as additional muscle protein."
+  },
+  {
+    "q": "Which protease class is correctly matched with its function or feature?",
+    "choices": {
+      "A": "Cathepsins — cytoplasmic enzymes that require ubiquitin tagging",
+      "B": "Caspases — cysteine proteases involved in apoptosis and activated from procaspases",
+      "C": "Matrix metalloproteinases — serine proteases activated only by hydrochloric acid",
+      "D": "Calpains — zinc-dependent enzymes for extracellular matrix remodeling"
+    },
+    "answer": "B",
+    "explanation": "Caspases are cysteine proteases that cleave after aspartate residues and function in apoptosis after activation from procaspases."
+  },
+  {
+    "q": "Matrix metalloproteinases are characterized by their requirement for:",
+    "choices": {
+      "A": "Zinc for catalysis",
+      "B": "Sodium for transport",
+      "C": "Ubiquitin for activation",
+      "D": "Hydrochloric acid for denaturation"
+    },
+    "answer": "A",
+    "explanation": "Matrix metalloproteinases require zinc for catalysis and are involved in remodeling the extracellular matrix."
+  },
+  {
+    "q": "Which system primarily degrades ubiquitin-tagged intracellular proteins in an ATP-dependent process?",
+    "choices": {
+      "A": "Lysosomal cathepsin system",
+      "B": "Ubiquitin–proteasome system",
+      "C": "γ-glutamyl cycle",
+      "D": "Urea cycle"
+    },
+    "answer": "B",
+    "explanation": "The ubiquitin–proteasome system degrades proteins that have been covalently tagged with ubiquitin, using ATP to unfold and process the target protein."
+  },
+  {
+    "q": "Autophagy contributes to amino acid homeostasis by:",
+    "choices": {
+      "A": "Enclosing cytoplasmic components in vesicles that fuse with lysosomes for degradation",
+      "B": "Directly converting ammonia into urea in the kidney",
+      "C": "Activating pancreatic zymogens in the intestinal lumen",
+      "D": "Transporting amino acids into the blood through VLDL particles"
+    },
+    "answer": "A",
+    "explanation": "Autophagy encloses portions of the cytoplasm in vesicles that fuse with lysosomes, where cathepsins degrade proteins into amino acids."
+  },
+  {
+    "q": "During starvation, autophagy is favored because low-energy conditions activate AMPK, which:",
+    "choices": {
+      "A": "Inhibits TSC1/TSC2 and keeps mTOR active",
+      "B": "Stimulates TSC1/TSC2, inactivates Rheb, and suppresses mTOR activity",
+      "C": "Activates Akt kinase, which promotes mTOR-mediated protein synthesis",
+      "D": "Converts ubiquitin into glutathione for cysteine salvage"
+    },
+    "answer": "B",
+    "explanation": "Under low-energy conditions, AMPK stimulates TSC1/TSC2, which converts Rheb-GTP to Rheb-GDP. This inactivates mTOR, promoting autophagy and reducing protein synthesis."
+  },
+  {
+    "q": "Ubiquitin marks intracellular proteins for degradation primarily by attaching to which amino acid residue on target proteins?",
+    "choices": {
+      "A": "Serine",
+      "B": "Lysine",
+      "C": "Aspartate",
+      "D": "Glycine"
+    },
+    "answer": "B",
+    "explanation": "Ubiquitin is attached to lysine residues on target proteins, often forming polyubiquitin chains that signal proteasomal degradation."
+  },
+  {
+    "q": "Which enzyme in the ubiquitin conjugation system uses ATP to activate ubiquitin and attach it to its own sulfhydryl group?",
+    "choices": {
+      "A": "E1 ubiquitin-activating enzyme",
+      "B": "E2 ubiquitin-conjugating enzyme",
+      "C": "E3 ubiquitin ligase",
+      "D": "20S proteasome"
+    },
+    "answer": "A",
+    "explanation": "E1, the ubiquitin-activating enzyme, uses ATP to activate ubiquitin and attach it to its own sulfhydryl group."
+  },
+  {
+    "q": "Which component of the ubiquitin conjugation system primarily provides substrate specificity by binding the target protein?",
+    "choices": {
+      "A": "E1 enzyme",
+      "B": "E2 enzyme",
+      "C": "E3 ligase",
+      "D": "PA200 regulator"
+    },
+    "answer": "C",
+    "explanation": "E3 ubiquitin ligase binds the target protein and E2, giving the system substrate specificity and transferring ubiquitin to the target."
+  },
+  {
+    "q": "Polyubiquitination of a protein generally indicates that the protein is:",
+    "choices": {
+      "A": "Ready for intestinal absorption",
+      "B": "Marked for degradation by the proteasome",
+      "C": "Converted into glutathione",
+      "D": "Secreted through VLDL particles"
+    },
+    "answer": "B",
+    "explanation": "Polyubiquitin chains mark proteins for recognition and degradation by the proteasome."
+  },
+  {
+    "q": "ATP is required in proteasomal degradation mainly to:",
+    "choices": {
+      "A": "Convert ammonia into urea",
+      "B": "Activate pepsinogen in the stomach",
+      "C": "Unfold and feed tagged proteins into the proteasome",
+      "D": "Transport amino acids through the hepatic portal vein"
+    },
+    "answer": "C",
+    "explanation": "ATP is used to unfold and denature ubiquitin-tagged proteins so they can be fed into the proteasome for degradation."
+  },
+  {
+    "q": "Proteins containing PEST sequences generally have short half-lives because they are commonly targeted for:",
+    "choices": {
+      "A": "Glycogen synthesis",
+      "B": "Ubiquitin–proteasome degradation",
+      "C": "Bile acid conjugation",
+      "D": "Intestinal pinocytosis"
+    },
+    "answer": "B",
+    "explanation": "PEST sequences, rich in proline, glutamate, serine, and threonine, are associated with short protein half-lives and targeting through the ubiquitin–proteasome system."
+  },
+  {
+    "q": "Dysregulation of E3 ligases is associated with cancer mainly because these enzymes may affect proteins involved in:",
+    "choices": {
+      "A": "Cell cycle control and apoptosis",
+      "B": "Sodium cotransport only",
+      "C": "Gastric acid secretion",
+      "D": "Bicarbonate neutralization"
+    },
+    "answer": "A",
+    "explanation": "E3 ligases regulate degradation of proteins involved in cell cycle control and apoptosis. Dysregulation can contribute to uncontrolled cell growth and cancer."
+  },
+  {
+    "q": "The γ-glutamyl cycle is now understood to function mainly in:",
+    "choices": {
+      "A": "General amino acid transport in all tissues",
+      "B": "Glutathione maintenance and cysteine salvage",
+      "C": "Urea synthesis from ammonia",
+      "D": "Proteasomal degradation of misfolded proteins"
+    },
+    "answer": "B",
+    "explanation": "Although once thought to be central for amino acid transport, the γ-glutamyl cycle is now mainly linked to glutathione maintenance and cysteine salvage."
+  },
+  {
+    "q": "Glutathione is composed of which three amino acid residues?",
+    "choices": {
+      "A": "Glutamate, cysteine, and glycine",
+      "B": "Alanine, lysine, and arginine",
+      "C": "Phenylalanine, tyrosine, and tryptophan",
+      "D": "Valine, leucine, and isoleucine"
+    },
+    "answer": "A",
+    "explanation": "Glutathione is a tripeptide composed of glutamate, cysteine, and glycine."
+  },
+  {
+    "q": "The enzyme that cleaves the unique γ-glutamyl bond in glutathione is:",
+    "choices": {
+      "A": "Trypsin",
+      "B": "Transpeptidase",
+      "C": "Aminopeptidase",
+      "D": "Carboxypeptidase B"
+    },
+    "answer": "B",
+    "explanation": "Transpeptidase cleaves the unique γ-glutamyl bond in glutathione and participates in the γ-glutamyl cycle."
+  },
+  {
+    "q": "Glutathione protects cells, especially red blood cells, primarily by:",
+    "choices": {
+      "A": "Activating pancreatic zymogens",
+      "B": "Reducing oxidants such as hydrogen peroxide",
+      "C": "Increasing ammonium excretion",
+      "D": "Converting amino acids into VLDL"
+    },
+    "answer": "B",
+    "explanation": "Glutathione protects cells by reducing oxidants such as hydrogen peroxide, forming oxidized glutathione in the process."
+  },
+  {
+    "q": "In the fed state, amino acids reaching the liver are used for synthesis of proteins, especially:",
+    "choices": {
+      "A": "Serum albumin and other blood proteins",
+      "B": "Pepsinogen and hydrochloric acid",
+      "C": "Uric acid and creatinine",
+      "D": "Bile pigments and bilirubin only"
+    },
+    "answer": "A",
+    "explanation": "In the fed state, amino acids arriving at the liver are used to synthesize proteins, particularly blood proteins such as serum albumin."
+  },
+  {
+    "q": "During fasting, muscle releases amino acids, and some nitrogen is transported in the blood mainly in the form of:",
+    "choices": {
+      "A": "Alanine and glutamine",
+      "B": "Urea and bilirubin",
+      "C": "Creatinine and uric acid",
+      "D": "Glycogen and triacylglycerol"
+    },
+    "answer": "A",
+    "explanation": "During fasting, nitrogen from muscle amino acid metabolism is transported mainly as alanine and glutamine."
+  },
+  {
+    "q": "In the kidney during fasting, glutamine contributes to acid-base balance because it releases:",
+    "choices": {
+      "A": "Ammonia into the urine",
+      "B": "Bilirubin into feces",
+      "C": "VLDL into the blood",
+      "D": "Pepsin into the stomach"
+    },
+    "answer": "A",
+    "explanation": "In the kidney, glutamine releases ammonia into the urine. The ammonia can bind protons and help with acid-base balance."
+  },
+  {
+    "q": "In the fasting state, alanine and other amino acids enter the liver, where their nitrogen is converted to urea while their carbon skeletons are converted mainly to:",
+    "choices": {
+      "A": "Glucose and ketone bodies",
+      "B": "Uric acid and creatinine",
+      "C": "Ammonium and bilirubin",
+      "D": "Pepsin and trypsin"
+    },
+    "answer": "A",
+    "explanation": "During fasting, amino acid nitrogen is converted to urea in the liver, while carbon skeletons are converted to glucose and ketone bodies for use by other tissues."
+  }
+];
+
+    let currentIndex = 0;
+    let selectedAnswer = null;
+    let userAnswers = new Array(questions.length).fill(null);
+    let submitted = new Array(questions.length).fill(false);
+
+    const questionBadge = document.getElementById("questionBadge");
+    const scoreBadge = document.getElementById("scoreBadge");
+    const progressBar = document.getElementById("progressBar");
+    const questionText = document.getElementById("questionText");
+    const choicesEl = document.getElementById("choices");
+    const feedback = document.getElementById("feedback");
+    const feedbackTitle = document.getElementById("feedbackTitle");
+    const explanation = document.getElementById("explanation");
+    const prevBtn = document.getElementById("prevBtn");
+    const submitBtn = document.getElementById("submitBtn");
+    const nextBtn = document.getElementById("nextBtn");
+    const answeredStatus = document.getElementById("answeredStatus");
+    const quizArea = document.getElementById("quizArea");
+    const resultArea = document.getElementById("resultArea");
+    const finalScore = document.getElementById("finalScore");
+    const finalMessage = document.getElementById("finalMessage");
+    const restartBtn = document.getElementById("restartBtn");
+    const reviewList = document.getElementById("reviewList");
+
+    function getScore() {
+      return userAnswers.reduce((score, ans, idx) => score + (ans === questions[idx].answer ? 1 : 0), 0);
+    }
+
+    function getAnsweredCount() {
+      return submitted.filter(Boolean).length;
+    }
+
+    function renderQuestion() {
+      const item = questions[currentIndex];
+      selectedAnswer = userAnswers[currentIndex];
+
+      questionBadge.textContent = `Question ${currentIndex + 1} of ${questions.length}`;
+      scoreBadge.textContent = `Score: ${getScore()}`;
+      answeredStatus.textContent = `Answered: ${getAnsweredCount()} / ${questions.length}`;
+      progressBar.style.width = `${((currentIndex + 1) / questions.length) * 100}%`;
+
+      questionText.textContent = `${currentIndex + 1}. ${item.q}`;
+      choicesEl.innerHTML = "";
+
+      Object.entries(item.choices).forEach(([letter, text]) => {
+        const label = document.createElement("label");
+        label.className = "choice";
+        label.dataset.letter = letter;
+
+        const input = document.createElement("input");
+        input.type = "radio";
+        input.name = "choice";
+        input.value = letter;
+        input.checked = selectedAnswer === letter;
+        input.disabled = submitted[currentIndex];
+
+        const content = document.createElement("div");
+        content.innerHTML = `<span class="letter">${letter}.</span> ${escapeHtml(text)}`;
+
+        label.appendChild(input);
+        label.appendChild(content);
+        label.addEventListener("click", () => {
+          if (!submitted[currentIndex]) {
+            selectedAnswer = letter;
+            userAnswers[currentIndex] = letter;
+          }
+        });
+
+        choicesEl.appendChild(label);
+      });
+
+      feedback.className = "feedback";
+      feedbackTitle.textContent = "";
+      explanation.textContent = "";
+
+      if (submitted[currentIndex]) {
+        showFeedback();
+      }
+
+      prevBtn.disabled = currentIndex === 0;
+      submitBtn.disabled = submitted[currentIndex];
+      nextBtn.disabled = !submitted[currentIndex];
+      nextBtn.textContent = currentIndex === questions.length - 1 ? "Finish Quiz" : "Next";
+    }
+
+    function showFeedback() {
+      const item = questions[currentIndex];
+      const answer = userAnswers[currentIndex];
+      const isCorrect = answer === item.answer;
+
+      document.querySelectorAll(".choice").forEach(choice => {
+        const letter = choice.dataset.letter;
+        choice.querySelector("input").disabled = true;
+
+        if (letter === item.answer) {
+          choice.classList.add("correct");
+        } else if (letter === answer && !isCorrect) {
+          choice.classList.add("incorrect");
+        }
+      });
+
+      feedback.classList.add("show", isCorrect ? "correct" : "incorrect");
+      feedbackTitle.textContent = isCorrect
+        ? `Correct. Answer: ${item.answer}`
+        : `Incorrect. Correct answer: ${item.answer}`;
+      explanation.textContent = item.explanation;
+      scoreBadge.textContent = `Score: ${getScore()}`;
+      answeredStatus.textContent = `Answered: ${getAnsweredCount()} / ${questions.length}`;
+    }
+
+    function submitAnswer() {
+      if (!selectedAnswer) {
+        alert("Please select an answer first.");
+        return;
+      }
+      userAnswers[currentIndex] = selectedAnswer;
+      submitted[currentIndex] = true;
+      showFeedback();
+      submitBtn.disabled = true;
+      nextBtn.disabled = false;
+    }
+
+    function nextQuestion() {
+      if (currentIndex === questions.length - 1) {
+        showResults();
+      } else {
+        currentIndex++;
+        renderQuestion();
+      }
+    }
+
+    function prevQuestion() {
+      if (currentIndex > 0) {
+        currentIndex--;
+        renderQuestion();
+      }
+    }
+
+    function showResults() {
+      quizArea.style.display = "none";
+      resultArea.classList.add("show");
+      const score = getScore();
+      const percent = Math.round((score / questions.length) * 100);
+      finalScore.textContent = `${score} / ${questions.length} (${percent}%)`;
+      finalMessage.textContent = percent >= 80
+        ? "Excellent work. You demonstrated strong mastery of nitrogen/protein metabolism."
+        : percent >= 60
+          ? "Good effort. Review the explanations for the items you missed."
+          : "Keep reviewing the key concepts, especially digestion, transport, turnover, and fasting metabolism.";
+
+      reviewList.innerHTML = "";
+      questions.forEach((item, index) => {
+        const answer = userAnswers[index] || "No answer";
+        const correct = answer === item.answer;
+        const div = document.createElement("div");
+        div.className = "review-item";
+        div.innerHTML = `
+          <strong>${index + 1}. ${escapeHtml(item.q)}</strong><br>
+          Your answer: <strong style="color:${correct ? 'var(--correct)' : 'var(--wrong)'}">${answer}</strong><br>
+          Correct answer: <strong>${item.answer}. ${escapeHtml(item.choices[item.answer])}</strong><br>
+          Explanation: ${escapeHtml(item.explanation)}
+        `;
+        reviewList.appendChild(div);
+      });
+    }
+
+    function restartQuiz() {
+      currentIndex = 0;
+      selectedAnswer = null;
+      userAnswers = new Array(questions.length).fill(null);
+      submitted = new Array(questions.length).fill(false);
+      resultArea.classList.remove("show");
+      quizArea.style.display = "block";
+      renderQuestion();
+    }
+
+    function escapeHtml(str) {
+      return String(str)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+    }
+
+    submitBtn.addEventListener("click", submitAnswer);
+    nextBtn.addEventListener("click", nextQuestion);
+    prevBtn.addEventListener("click", prevQuestion);
+    restartBtn.addEventListener("click", restartQuiz);
+
+    renderQuestion();
+  </script>
+</body>
+</html>
