@@ -25,35 +25,19 @@
     body {
       margin: 0;
       min-height: 100vh;
-      background:
-        radial-gradient(circle at top left, rgba(29, 78, 216, 0.18), transparent 32rem),
-        var(--bg);
+      background: radial-gradient(circle at top left, rgba(29, 78, 216, 0.18), transparent 32rem), var(--bg);
       color: var(--text);
       font-family: Arial, Helvetica, sans-serif;
       line-height: 1.5;
     }
 
-    .app {
-      width: min(940px, 94vw);
-      margin: 36px auto;
-    }
+    .app { width: min(940px, 94vw); margin: 36px auto; }
 
-    header {
-      text-align: center;
-      margin-bottom: 22px;
-    }
+    header { text-align: center; margin-bottom: 22px; }
 
-    h1 {
-      margin: 0;
-      font-size: clamp(1.65rem, 3vw, 2.5rem);
-      letter-spacing: -0.03em;
-    }
+    h1 { margin: 0; font-size: clamp(1.65rem, 3vw, 2.5rem); letter-spacing: -0.03em; }
 
-    .subtitle {
-      color: var(--muted);
-      margin-top: 8px;
-      font-size: 1rem;
-    }
+    .subtitle { color: var(--muted); margin-top: 8px; font-size: 1rem; }
 
     .quiz-card {
       background: var(--card);
@@ -106,10 +90,7 @@
       margin: 0 0 20px;
     }
 
-    .choices {
-      display: grid;
-      gap: 12px;
-    }
+    .choices { display: grid; gap: 12px; }
 
     .choice {
       border: 2px solid var(--border);
@@ -125,32 +106,15 @@
       user-select: none;
     }
 
-    .choice:hover {
-      transform: translateY(-1px);
-      border-color: #9ab0dc;
-    }
+    .choice:hover { transform: translateY(-1px); border-color: #9ab0dc; }
 
-    .choice input {
-      margin-top: 5px;
-      transform: scale(1.2);
-      accent-color: var(--primary);
-    }
+    .choice input { margin-top: 5px; transform: scale(1.2); accent-color: var(--primary); }
 
-    .letter {
-      font-weight: 800;
-      color: var(--primary);
-    }
+    .letter { font-weight: 800; color: var(--primary); }
 
-    .choice.correct {
-      border-color: var(--correct);
-      background: var(--correct-bg);
-      font-weight: 800;
-    }
+    .choice.correct { border-color: var(--correct); background: var(--correct-bg); font-weight: 800; }
 
-    .choice.incorrect {
-      border-color: var(--wrong);
-      background: var(--wrong-bg);
-    }
+    .choice.incorrect { border-color: var(--wrong); background: var(--wrong-bg); }
 
     .feedback {
       margin-top: 20px;
@@ -163,18 +127,12 @@
 
     .feedback.show { display: block; }
 
-    .feedback-title {
-      margin: 0 0 8px;
-      font-weight: 900;
-    }
+    .feedback-title { margin: 0 0 8px; font-weight: 900; }
 
     .feedback.correct .feedback-title { color: var(--correct); }
     .feedback.incorrect .feedback-title { color: var(--wrong); }
 
-    .explanation {
-      margin: 0;
-      color: #2f3b52;
-    }
+    .explanation { margin: 0; color: #2f3b52; }
 
     .controls {
       display: flex;
@@ -197,56 +155,25 @@
       transition: background 0.12s ease, transform 0.12s ease;
     }
 
-    button:hover:not(:disabled) {
-      background: var(--primary-dark);
-      transform: translateY(-1px);
-    }
+    button:hover:not(:disabled) { background: var(--primary-dark); transform: translateY(-1px); }
 
-    button:disabled {
-      opacity: 0.55;
-      cursor: not-allowed;
-    }
+    button:disabled { opacity: 0.55; cursor: not-allowed; }
 
-    .secondary {
-      background: #e8edf7;
-      color: var(--text);
-    }
+    .secondary { background: #e8edf7; color: var(--text); }
 
-    .secondary:hover:not(:disabled) {
-      background: #d9e2f2;
-    }
+    .secondary:hover:not(:disabled) { background: #d9e2f2; }
 
-    .score-box {
-      color: var(--muted);
-      font-weight: 800;
-    }
+    .score-box { color: var(--muted); font-weight: 800; }
 
-    .result {
-      text-align: center;
-      padding: 26px 10px;
-      display: none;
-    }
+    .result { text-align: center; padding: 26px 10px; display: none; }
 
     .result.show { display: block; }
 
-    .result h2 {
-      font-size: clamp(1.6rem, 4vw, 2.2rem);
-      margin: 0 0 10px;
-    }
+    .result h2 { font-size: clamp(1.6rem, 4vw, 2.2rem); margin: 0 0 10px; }
 
-    .result-score {
-      font-size: 1.25rem;
-      font-weight: 900;
-      color: var(--primary);
-      margin-bottom: 16px;
-    }
+    .result-score { font-size: 1.25rem; font-weight: 900; color: var(--primary); margin-bottom: 16px; }
 
-    .review-list {
-      margin-top: 24px;
-      text-align: left;
-      display: grid;
-      gap: 14px;
-    }
+    .review-list { margin-top: 24px; text-align: left; display: grid; gap: 14px; }
 
     .review-item {
       border: 1px solid var(--border);
@@ -255,28 +182,13 @@
       background: #f8fafc;
     }
 
-    .review-item strong {
-      color: var(--text);
-    }
+    .review-item strong { color: var(--text); }
 
     @media (max-width: 560px) {
-      .choice {
-        grid-template-columns: 32px 1fr;
-        padding: 13px;
-      }
-
-      .controls {
-        align-items: stretch;
-      }
-
-      .controls button {
-        width: 100%;
-      }
-
-      .score-box {
-        width: 100%;
-        text-align: center;
-      }
+      .choice { grid-template-columns: 32px 1fr; padding: 13px; }
+      .controls { align-items: stretch; }
+      .controls button { width: 100%; }
+      .score-box { width: 100%; text-align: center; }
     }
   </style>
 </head>
@@ -284,7 +196,7 @@
   <main class="app">
     <header>
       <h1>Nitrogen/Protein Metabolism Quiz</h1>
-      <div class="subtitle">Practice test made with heart by Dyx</div>
+      <div class="subtitle">60-item randomized quiz with expanded answer explanations</div>
     </header>
 
     <section class="quiz-card" id="quizCard">
@@ -324,7 +236,7 @@
   </main>
 
   <script>
-    const questions = [
+    const questionBank = [
   {
     "q": "A patient consuming adequate calories but insufficient dietary protein develops edema and muscle wasting. Which biochemical explanation best accounts for the edema observed in this condition?",
     "choices": {
@@ -334,7 +246,7 @@
       "D": "Excessive conversion of phenylalanine to tyrosine"
     },
     "answer": "B",
-    "explanation": "Kwashiorkor involves protein deficiency despite adequate calorie intake. Low availability of essential amino acids reduces synthesis of plasma proteins such as albumin, decreasing plasma oncotic pressure and causing fluid accumulation or edema."
+    "explanation": "Kwashiorkor results from severe protein deficiency even when calorie intake may be adequate. Because essential amino acids are lacking, the liver cannot synthesize enough plasma proteins, especially albumin. Albumin maintains plasma oncotic pressure, which helps keep fluid inside blood vessels. When albumin decreases, fluid shifts into tissues, producing edema and a swollen abdomen. Muscle wasting also occurs because the body breaks down its own proteins to supply amino acids for vital functions."
   },
   {
     "q": "Which statement best describes the primary metabolic fate of amino acids after absorption from dietary protein?",
@@ -345,7 +257,7 @@
       "D": "They are transported directly to adipose tissue for conversion into triacylglycerols only"
     },
     "answer": "B",
-    "explanation": "Absorbed amino acids enter cellular amino acid pools, where they may be used to synthesize proteins, produce nitrogen-containing compounds, or be oxidized after removal of nitrogen."
+    "explanation": "Absorbed amino acids enter cellular amino acid pools rather than being stored as a special amino acid reserve. From this pool, they may be used to synthesize body proteins, produce nitrogen-containing compounds such as neurotransmitters, hormones, heme, creatine phosphate, melanin, and nucleotide bases, or undergo oxidation for energy. When amino acids are oxidized, their nitrogen must be removed first, while the carbon skeleton enters energy-producing or storage pathways."
   },
   {
     "q": "Before amino acids can be oxidized for energy, which process must generally occur first?",
@@ -356,7 +268,7 @@
       "D": "Direct conversion of amino acids into bile salts"
     },
     "answer": "B",
-    "explanation": "Amino acids contain nitrogen that must be removed before their carbon skeletons can be oxidized. The removed nitrogen forms ammonia, which is toxic and is converted to urea in the liver."
+    "explanation": "Before amino acids can be used as an energy source, their amino nitrogen must generally be removed by transamination or deamination. The nitrogen portion cannot simply enter energy pathways like the carbon skeleton can. Removed nitrogen may form ammonia, which is toxic, so the liver converts it to urea through the urea cycle. The remaining carbon skeleton can then enter pathways such as glycolysis, the TCA cycle, ketone body production, or gluconeogenesis."
   },
   {
     "q": "Which organ is the principal site for amino acid oxidation and conversion of toxic ammonia into urea?",
@@ -367,7 +279,7 @@
       "D": "Intestinal epithelium"
     },
     "answer": "B",
-    "explanation": "The liver is the main site of amino acid oxidation and the site of the urea cycle, which detoxifies ammonia by converting it to urea for urinary excretion."
+    "explanation": "The liver is the central organ for amino acid oxidation and nitrogen disposal. It receives amino acids from the intestine through the hepatic portal vein and can use them for protein synthesis, gluconeogenesis, ketogenesis, or conversion to fat. The liver also contains the urea cycle, which converts toxic ammonia into urea. The kidney excretes urea, but the liver is the primary site where urea is produced."
   },
   {
     "q": "Branched-chain amino acids are unusual because they can be significantly oxidized in which tissue?",
@@ -378,7 +290,7 @@
       "D": "Pancreatic acinar cells"
     },
     "answer": "A",
-    "explanation": "Unlike many amino acids that are mainly oxidized in the liver, branched-chain amino acids such as leucine, isoleucine, and valine can be oxidized significantly in skeletal muscle."
+    "explanation": "Skeletal muscle is especially important in the metabolism of branched-chain amino acids: leucine, isoleucine, and valine. Unlike many amino acids that are primarily catabolized in the liver, branched-chain amino acids are significantly oxidized in muscle. This becomes important during fasting and exercise because muscle can use these amino acids for energy and transfer nitrogen to alanine and glutamine for transport to other organs."
   },
   {
     "q": "Under normal physiological conditions, which nitrogenous product accounts for approximately 90% of nitrogen excretion?",
@@ -389,7 +301,7 @@
       "D": "Ammonium ion"
     },
     "answer": "C",
-    "explanation": "Urea is the major nitrogenous waste product and accounts for about 90% of nitrogen excretion under normal conditions."
+    "explanation": "Urea is the dominant nitrogenous excretory product under normal conditions and accounts for about 90% of nitrogen excretion. It is produced in the liver from ammonia through the urea cycle and is excreted by the kidney in urine. Urea excretion changes with dietary protein intake because more amino acid catabolism produces more nitrogen waste. Ammonium, creatinine, and uric acid are also excreted, but they contribute less to total nitrogen excretion."
   },
   {
     "q": "During metabolic acidosis, ammonium excretion increases primarily because the kidney uses ammonia to:",
@@ -400,7 +312,7 @@
       "D": "Activate pancreatic zymogens"
     },
     "answer": "B",
-    "explanation": "During acidosis, the kidney releases more ammonia, which binds excess hydrogen ions in urine to form ammonium, helping remove acid from the body."
+    "explanation": "During metabolic acidosis, the kidney increases ammonia production and excretion. Ammonia binds excess hydrogen ions in the urine to form ammonium, helping remove acid from the body. This is a major renal buffering mechanism. The process is especially linked to glutamine metabolism in the kidney, where glutamine can release ammonia that becomes ammonium in the urine."
   },
   {
     "q": "Which of the following best represents a state of negative nitrogen balance?",
@@ -411,7 +323,7 @@
       "D": "Nitrogen intake and protein synthesis both increase equally"
     },
     "answer": "C",
-    "explanation": "Negative nitrogen balance occurs when nitrogen excretion is greater than nitrogen intake, as seen in illness, starvation, or protein malnutrition."
+    "explanation": "Negative nitrogen balance means the body loses more nitrogen than it takes in. This indicates that protein breakdown exceeds protein synthesis, which commonly occurs in malnutrition, severe illness, trauma, burns, or starvation. It is different from neutral balance, where intake equals excretion, and positive balance, where intake exceeds excretion during growth, pregnancy, or recovery."
   },
   {
     "q": "Which physiological condition is most closely associated with positive nitrogen balance?",
@@ -422,7 +334,7 @@
       "D": "Chronic protein malnutrition"
     },
     "answer": "C",
-    "explanation": "Positive nitrogen balance occurs when nitrogen intake exceeds nitrogen excretion, commonly during growth, pregnancy, and recovery from illness."
+    "explanation": "Positive nitrogen balance occurs when nitrogen intake is greater than nitrogen excretion. This means the body is retaining nitrogen for net protein synthesis. Pregnancy is a classic example because maternal and fetal tissues are growing and require new protein formation. Growth, tissue repair, and recovery from illness are also associated with positive nitrogen balance. Starvation, severe illness, and chronic protein malnutrition usually cause negative nitrogen balance."
   },
   {
     "q": "Tyrosine is classified as non-essential in adults because it can be synthesized from which essential amino acid?",
@@ -433,7 +345,7 @@
       "D": "Tryptophan"
     },
     "answer": "B",
-    "explanation": "Tyrosine can be synthesized from the essential amino acid phenylalanine; therefore, it is not considered essential in adults when phenylalanine is adequate."
+    "explanation": "Tyrosine is considered non-essential in adults because it can be synthesized from phenylalanine, an essential amino acid. However, this depends on adequate phenylalanine intake and normal metabolism. This relationship is clinically important because if phenylalanine metabolism is impaired, tyrosine can become conditionally important. The key concept is that tyrosine’s carbon skeleton can be supplied from phenylalanine."
   },
   {
     "q": "Cysteine synthesis is dependent on glucose-derived carbon skeletons but also requires sulfur from which essential amino acid?",
@@ -444,7 +356,7 @@
       "D": "Valine"
     },
     "answer": "C",
-    "explanation": "Cysteine can be synthesized from glucose-derived carbon skeletons, but it requires sulfur donated by the essential amino acid methionine."
+    "explanation": "Cysteine can be synthesized by the body, but its synthesis requires sulfur from methionine, an essential amino acid. This makes cysteine conditionally dependent on methionine availability. Its carbon skeleton can be derived from glucose-related metabolism, but without methionine-derived sulfur, cysteine synthesis is limited. Cysteine is also important in proteins, glutathione, and disulfide bond formation."
   },
   {
     "q": "Which amino acid is considered essential during growth but not required as an essential amino acid in adults?",
@@ -455,7 +367,7 @@
       "D": "Glycine"
     },
     "answer": "A",
-    "explanation": "Arginine is conditionally essential during periods of growth but is not considered essential for healthy adults."
+    "explanation": "Arginine is considered conditionally essential during periods of growth because endogenous synthesis may not meet the body’s demand. In healthy adults, arginine is usually not classified as essential because the body can synthesize enough. During growth, recovery, or certain stress states, arginine demand may increase. This illustrates that essentiality can depend on age and physiological condition."
   },
   {
     "q": "After removal of nitrogen, amino acid carbon skeletons may be converted into all of the following except:",
@@ -466,7 +378,7 @@
       "D": "Urea nitrogen"
     },
     "answer": "D",
-    "explanation": "Amino acid carbon skeletons can become pyruvate, acetyl CoA, or TCA cycle intermediates. Urea nitrogen comes from the removed nitrogen, not from the carbon skeleton."
+    "explanation": "After nitrogen removal, amino acid carbon skeletons are metabolized through carbon-based pathways. They can become pyruvate, acetyl CoA, or intermediates of the TCA cycle, which can then support energy production, gluconeogenesis, ketogenesis, or lipid synthesis. Urea nitrogen is not a carbon skeleton product; it comes from the removed nitrogen atoms that are detoxified through the urea cycle."
   },
   {
     "q": "In the fed state, amino acids released from dietary proteins travel first through the hepatic portal vein to the liver, where excess carbon skeletons may be converted into:",
@@ -477,7 +389,7 @@
       "D": "Pepsinogen or trypsinogen"
     },
     "answer": "A",
-    "explanation": "In the fed state, excess amino acid carbon skeletons in the liver may be converted to glucose, glycogen, fatty acids, or triacylglycerols."
+    "explanation": "In the fed state, amino acids from dietary protein enter the liver through the hepatic portal vein. Amino acids are first used for protein synthesis and other essential nitrogen-containing compounds. When amino acids are present in excess, their nitrogen is removed and the carbon skeletons may be converted into glucose, glycogen, fatty acids, or triacylglycerols. Triacylglycerols can be packaged into VLDL for export from the liver."
   },
   {
     "q": "Which nitrogenous waste is primarily derived from purine breakdown?",
@@ -488,7 +400,7 @@
       "D": "Ammonia"
     },
     "answer": "B",
-    "explanation": "Uric acid is produced from purine breakdown and is one of the major nitrogenous urinary excretory products."
+    "explanation": "Uric acid is produced from the breakdown of purine bases. This distinguishes it from creatinine, which comes from creatine phosphate metabolism, and bilirubin, which comes from heme breakdown. Ammonia is produced from amino acid and glutamine metabolism and may be converted to urea or excreted as ammonium. Knowing the origin of each nitrogenous waste helps connect metabolism with urinary excretion patterns."
   },
   {
     "q": "Protein digestion begins in the stomach primarily through the action of which enzyme?",
@@ -499,7 +411,7 @@
       "D": "Aminopeptidase"
     },
     "answer": "B",
-    "explanation": "Pepsin begins protein digestion in the stomach by breaking dietary proteins into smaller polypeptides."
+    "explanation": "Protein digestion begins in the stomach with pepsin. Pepsin is produced from its inactive precursor, pepsinogen, and starts breaking dietary proteins into smaller polypeptides. Although the stomach begins protein digestion, complete digestion requires pancreatic proteases and intestinal peptidases in the small intestine. Trypsin, elastase, and aminopeptidases act mainly later in the digestive process."
   },
   {
     "q": "Pepsinogen is secreted by chief cells and converted to pepsin mainly because of:",
@@ -510,7 +422,7 @@
       "D": "Sodium-dependent amino acid transport"
     },
     "answer": "B",
-    "explanation": "Chief cells secrete pepsinogen, and hydrochloric acid from parietal cells lowers gastric pH, causing pepsinogen to become active pepsin."
+    "explanation": "Pepsinogen is secreted by chief cells in the stomach and is activated when hydrochloric acid from parietal cells lowers the gastric pH. Acidic pH causes conformational changes and autocatalytic cleavage that convert pepsinogen to pepsin. This is an example of zymogen activation, which prevents enzymes from digesting proteins inside the cells where they are produced."
   },
   {
     "q": "Which statement best explains why gastric acid facilitates protein digestion?",
@@ -521,7 +433,7 @@
       "D": "It directly transports amino acids into epithelial cells"
     },
     "answer": "B",
-    "explanation": "Gastric acid denatures dietary proteins, disrupting their structure and making peptide bonds more accessible to proteolytic enzymes."
+    "explanation": "Gastric acid helps protein digestion by denaturing dietary proteins. Denaturation unfolds proteins and exposes peptide bonds, making them more accessible to pepsin. HCl also helps activate pepsinogen into pepsin. It does not directly convert amino acids into glucose or transport them into epithelial cells; those are later metabolic and absorptive processes."
   },
   {
     "q": "Pepsin is best classified as a/an:",
@@ -532,7 +444,7 @@
       "D": "Serosal transporter for amino acid release"
     },
     "answer": "B",
-    "explanation": "Pepsin is an endopeptidase that remains active in the acidic environment of the stomach."
+    "explanation": "Pepsin is an endopeptidase because it cleaves peptide bonds within the interior of polypeptide chains rather than removing amino acids from an end. It is active at low pH, which matches the acidic environment of the stomach. In contrast, aminopeptidases act at the brush border, and carboxypeptidases remove amino acids from the carboxyl end in the intestine."
   },
   {
     "q": "Pepsin preferentially cleaves peptide bonds involving which type of amino acid residues?",
@@ -543,7 +455,7 @@
       "D": "Small side-chain residues only"
     },
     "answer": "B",
-    "explanation": "Pepsin preferentially cleaves peptide bonds involving aromatic or acidic amino acid residues."
+    "explanation": "Pepsin preferentially cleaves peptide bonds involving aromatic or acidic amino acid residues. This specificity helps produce smaller peptides from dietary proteins during gastric digestion. Different proteases have different specificities: trypsin acts after lysine and arginine, chymotrypsin prefers hydrophobic residues, and elastase acts near small side-chain residues."
   },
   {
     "q": "Pancreatic proteases are secreted mainly as inactive zymogens in order to:",
@@ -554,7 +466,7 @@
       "D": "Convert ammonia into urea before intestinal absorption"
     },
     "answer": "A",
-    "explanation": "Proteases are secreted as inactive zymogens to prevent premature enzyme activity and protect the tissues that produce them from autodigestion."
+    "explanation": "Pancreatic proteases are secreted as inactive zymogens to protect the pancreas from autodigestion. If enzymes like trypsin, chymotrypsin, or elastase were active inside pancreatic cells, they could digest cellular proteins. Activation occurs only after the zymogens enter the intestinal lumen. This zymogen strategy is a major safety mechanism in digestive enzyme production."
   },
   {
     "q": "Trypsinogen is activated to trypsin in the small intestine by:",
@@ -565,7 +477,7 @@
       "D": "Na⁺,K⁺-ATPase"
     },
     "answer": "B",
-    "explanation": "Enteropeptidase from intestinal cells cleaves trypsinogen to form active trypsin."
+    "explanation": "Trypsinogen is activated by enteropeptidase, an enzyme produced by intestinal cells. Once trypsin is formed, it activates more trypsinogen and also activates other pancreatic zymogens. This makes trypsin a key initiating enzyme in small intestinal protein digestion. Pepsin acts in the stomach, and Na⁺,K⁺-ATPase is involved in transport, not zymogen activation."
   },
   {
     "q": "Trypsin plays a central role in intestinal protein digestion because it:",
@@ -576,7 +488,7 @@
       "D": "Converts dietary protein directly into urea"
     },
     "answer": "B",
-    "explanation": "Once activated by enteropeptidase, trypsin activates other pancreatic zymogens such as chymotrypsinogen, proelastase, and procarboxypeptidases."
+    "explanation": "Trypsin is central because after it is activated by enteropeptidase, it activates several other pancreatic zymogens, including chymotrypsinogen, proelastase, and procarboxypeptidases. This creates an activation cascade in the intestinal lumen. Trypsin also directly digests proteins by cleaving peptide bonds after lysine and arginine residues."
   },
   {
     "q": "Which set includes the pancreatic serine endopeptidases involved in protein digestion?",
@@ -587,7 +499,7 @@
       "D": "Caspase, calpain, and proteasome"
     },
     "answer": "A",
-    "explanation": "Trypsin, chymotrypsin, and elastase are pancreatic serine endopeptidases that cleave internal peptide bonds."
+    "explanation": "Trypsin, chymotrypsin, and elastase are pancreatic serine endopeptidases. They contain an active-site serine and cleave internal peptide bonds within proteins. Their specificities differ: trypsin targets lysine and arginine, chymotrypsin prefers hydrophobic residues, and elastase cleaves near small amino acids. Pepsin is gastric, while cathepsins are lysosomal proteases."
   },
   {
     "q": "Trypsin specifically cleaves peptide bonds after which amino acid residues?",
@@ -598,7 +510,7 @@
       "D": "Glutamate and aspartate"
     },
     "answer": "B",
-    "explanation": "Trypsin cleaves peptide bonds on the carboxyl side of basic amino acids, especially lysine and arginine."
+    "explanation": "Trypsin specifically cleaves peptide bonds on the carboxyl side of basic amino acids, especially lysine and arginine. This specificity is important in protein digestion and is also widely used in biochemical protein analysis. Chymotrypsin and elastase have different preferences, so multiple enzymes are needed to efficiently digest proteins with varied amino acid sequences."
   },
   {
     "q": "Chymotrypsin preferentially cleaves peptide bonds involving:",
@@ -609,7 +521,7 @@
       "D": "Cystine residues"
     },
     "answer": "A",
-    "explanation": "Chymotrypsin preferentially cleaves peptide bonds near hydrophobic amino acid residues."
+    "explanation": "Chymotrypsin preferentially cleaves peptide bonds involving hydrophobic amino acid residues. This includes residues with bulky nonpolar side chains. Its specificity complements the action of trypsin and elastase, allowing pancreatic digestion to break proteins into a broad range of smaller peptides. It is activated from chymotrypsinogen by trypsin."
   },
   {
     "q": "Elastase is most associated with cleavage near amino acids that have:",
@@ -620,7 +532,7 @@
       "D": "Sulfur-containing side chains only"
     },
     "answer": "B",
-    "explanation": "Elastase cleaves peptide bonds involving small side-chain amino acids such as alanine and glycine."
+    "explanation": "Elastase cleaves peptide bonds near amino acids with small side chains, such as alanine and glycine. This is different from trypsin, which targets basic residues, and chymotrypsin, which prefers hydrophobic residues. Elastase is secreted as the zymogen proelastase and is activated by trypsin in the small intestine."
   },
   {
     "q": "Carboxypeptidases differ from trypsin, chymotrypsin, and elastase because carboxypeptidases:",
@@ -631,7 +543,7 @@
       "D": "Require ubiquitin tagging before activation"
     },
     "answer": "A",
-    "explanation": "Carboxypeptidases are exopeptidases that remove amino acids from the carboxyl terminal end of peptides."
+    "explanation": "Carboxypeptidases are exopeptidases, meaning they remove amino acids from the ends of peptides. Specifically, they remove amino acids from the carboxyl terminal end. This contrasts with trypsin, chymotrypsin, and elastase, which are endopeptidases that cleave internal peptide bonds. Both endopeptidases and exopeptidases are needed for complete protein digestion."
   },
   {
     "q": "Which pairing is correctly matched?",
@@ -642,7 +554,7 @@
       "D": "Pepsin — pancreatic protease activated by enteropeptidase"
     },
     "answer": "C",
-    "explanation": "Aminopeptidases remove amino acids from the amino terminal end of peptides. Carboxypeptidase A favors hydrophobic residues, while carboxypeptidase B targets basic residues."
+    "explanation": "Aminopeptidases remove amino acids from the amino terminal end of peptides, especially at the brush border of intestinal epithelial cells. Carboxypeptidase A prefers hydrophobic amino acids, while carboxypeptidase B targets basic amino acids such as lysine and arginine. Pepsin is a gastric enzyme activated by acid, not a pancreatic enzyme activated by enteropeptidase."
   },
   {
     "q": "Amino acids are absorbed from the intestinal lumen mainly through:",
@@ -653,7 +565,7 @@
       "D": "VLDL-mediated transport through the lymphatic system"
     },
     "answer": "A",
-    "explanation": "Amino acids are absorbed by secondary active sodium-dependent transporters and by facilitated diffusion transport systems."
+    "explanation": "Amino acids are absorbed mainly through secondary active Na⁺-dependent transport systems and facilitated diffusion. Sodium-dependent cotransport allows intestinal epithelial cells to concentrate amino acids using the sodium gradient. Facilitated transporters then help move amino acids toward the blood. This differs from lipid absorption, where triacylglycerols are packaged into chylomicrons."
   },
   {
     "q": "The Na⁺-dependent cotransport of amino acids across the intestinal brush border is classified as secondary active transport because it:",
@@ -664,7 +576,7 @@
       "D": "Depends on pancreatic bicarbonate to convert amino acids into peptides"
     },
     "answer": "B",
-    "explanation": "The cotransporter does not directly hydrolyze ATP. Instead, it uses the sodium gradient maintained by the basolateral Na⁺,K⁺-ATPase to bring amino acids into intestinal epithelial cells."
+    "explanation": "Na⁺-dependent amino acid uptake is secondary active transport because it uses the energy stored in the sodium gradient rather than directly hydrolyzing ATP at the apical membrane. The sodium gradient is maintained by Na⁺,K⁺-ATPase on the basolateral membrane. As sodium moves into the cell down its gradient, amino acids are brought in with it against their concentration gradient."
   },
   {
     "q": "After amino acids enter intestinal epithelial cells, they are released toward the blood mainly through:",
@@ -675,7 +587,7 @@
       "D": "Conversion into glutathione before circulation"
     },
     "answer": "A",
-    "explanation": "After uptake into intestinal epithelial cells, amino acids leave across the serosal or basolateral membrane through facilitated transporters down their concentration gradient."
+    "explanation": "After entering intestinal epithelial cells, amino acids leave the cell across the serosal or basolateral membrane through facilitated transporters. This movement is generally down the amino acid concentration gradient toward the interstitial fluid and blood. This completes transepithelial transport: uptake from the lumen at the brush border, then release toward circulation at the serosal side."
   },
   {
     "q": "Which statement best describes the specificity of intestinal amino acid transport systems?",
@@ -686,7 +598,7 @@
       "D": "Neutral amino acids are absorbed exclusively by passive diffusion"
     },
     "answer": "B",
-    "explanation": "The intestinal brush border contains multiple amino acid transporters with overlapping specificity, so most amino acids can be transported by more than one system."
+    "explanation": "Amino acid transport systems have overlapping specificity. This means a single amino acid may be transported by more than one carrier, and a single transporter may carry several related amino acids. This overlap provides flexibility and efficiency in absorption. It also explains why transport systems are categorized by amino acid properties, such as neutral, acidic, basic, and imino acids."
   },
   {
     "q": "Which group correctly represents one set of Na⁺-dependent transport categories found in the apical brush border?",
@@ -697,7 +609,7 @@
       "D": "Albumin, hemoglobin, collagen, and elastin"
     },
     "answer": "A",
-    "explanation": "Apical brush border transport categories include transporters for neutral amino acids, acidic amino acids, basic amino acids and cystine, and proline/hydroxyproline."
+    "explanation": "The apical brush border of intestinal epithelial cells contains several Na⁺-dependent transport categories, including transporters for neutral amino acids, acidic amino acids, basic amino acids with cystine, and proline/hydroxyproline. These systems overlap in specificity. They are not waste products, zymogens, or structural proteins, but membrane transport mechanisms for amino acid absorption."
   },
   {
     "q": "Compared with intestinal amino acid transporters, amino acid transporters in tissues such as liver and muscle:",
@@ -708,7 +620,7 @@
       "D": "Function only during protein digestion"
     },
     "answer": "C",
-    "explanation": "Tissue amino acid transporters differ from intestinal transporters in genetic origin, structure, and specificity, and they can vary among tissues."
+    "explanation": "Amino acid transporters in tissues such as liver and muscle are not identical to intestinal transporters. They differ in genetic origin, structure, and specificity, and their expression varies among tissues. This allows tissues to regulate amino acid uptake according to metabolic need. For example, liver transport systems support nitrogen metabolism, protein synthesis, and gluconeogenesis."
   },
   {
     "q": "The N-system transporter for glutamine is described in the file as being specific to which tissue?",
@@ -719,7 +631,7 @@
       "D": "Red blood cell"
     },
     "answer": "A",
-    "explanation": "The file identifies the N-system transporter for glutamine as specific to the liver."
+    "explanation": "The N-system transporter for glutamine is described as specific to the liver. This is important because glutamine is a major nitrogen carrier and participates in interorgan nitrogen transport. Tissue-specific transporters help organs perform specialized roles in amino acid metabolism. The liver, kidney, gut, and muscle all handle amino acids differently depending on nutritional state."
   },
   {
     "q": "The intracellular amino acid pool is replenished mainly from:",
@@ -730,7 +642,7 @@
       "D": "Creatinine conversion and purine degradation"
     },
     "answer": "A",
-    "explanation": "The intracellular amino acid pool comes from absorbed dietary amino acids and from degradation or turnover of the body’s own proteins."
+    "explanation": "The intracellular amino acid pool is replenished from two main sources: amino acids absorbed from the diet and amino acids produced by degradation of body proteins. This pool supplies substrates for protein synthesis, nitrogen-containing compounds, and energy metabolism. Because there is no large storage form of amino acids, continuous turnover and dietary intake are important for maintaining the pool."
   },
   {
     "q": "Which statement best describes protein turnover?",
@@ -741,7 +653,7 @@
       "D": "Protein turnover occurs only during starvation"
     },
     "answer": "B",
-    "explanation": "Protein turnover is the continuous synthesis and degradation of proteins. Different proteins have different half-lives, from minutes to days."
+    "explanation": "Protein turnover means proteins are continuously synthesized and degraded. Some proteins have very short half-lives, while others last hours or days. Turnover allows cells to remove damaged or unnecessary proteins and replace them with newly synthesized ones. It also helps maintain the intracellular amino acid pool. Turnover occurs in all cells, not only during starvation."
   },
   {
     "q": "Which protein source is specifically mentioned as being degraded during fasting to provide amino acids for energy metabolism?",
@@ -752,7 +664,7 @@
       "D": "Intestinal Na⁺,K⁺-ATPase"
     },
     "answer": "A",
-    "explanation": "During fasting, muscle proteins are broken down, releasing amino acids that can be used for energy metabolism or gluconeogenesis."
+    "explanation": "Muscle proteins are specifically degraded during fasting to provide amino acids for energy metabolism and gluconeogenesis. Muscle releases amino acids directly and also transfers nitrogen into alanine and glutamine for transport to other tissues. Alanine can go to the liver for gluconeogenesis, while glutamine can be used by kidney and gut. This is a major fasting adaptation."
   },
   {
     "q": "Excess dietary protein beyond the body’s needs does not continually increase muscle mass because the excess is mainly:",
@@ -763,7 +675,7 @@
       "D": "Converted directly into bilirubin"
     },
     "answer": "A",
-    "explanation": "Once protein requirements are met, excess amino acid carbon skeletons are converted to glycogen or fat rather than being stored as additional muscle protein."
+    "explanation": "Excess dietary protein does not simply become extra muscle. After protein synthesis needs are met, excess amino acids are catabolized. Their nitrogen is removed and excreted mainly as urea, while their carbon skeletons may be converted to glycogen or fat. Muscle growth requires not only amino acids but also appropriate training, hormonal signals, and protein synthesis stimulation."
   },
   {
     "q": "Which protease class is correctly matched with its function or feature?",
@@ -774,7 +686,7 @@
       "D": "Calpains — zinc-dependent enzymes for extracellular matrix remodeling"
     },
     "answer": "B",
-    "explanation": "Caspases are cysteine proteases that cleave after aspartate residues and function in apoptosis after activation from procaspases."
+    "explanation": "Caspases are cysteine proteases that cleave after aspartate residues and are involved in apoptosis. They are produced as inactive procaspases and activated during programmed cell death. Cathepsins are lysosomal proteases, matrix metalloproteinases require zinc and remodel extracellular matrix, and calpains are calcium-dependent cysteine proteases. This item tests recognition of protease classes and functions."
   },
   {
     "q": "Matrix metalloproteinases are characterized by their requirement for:",
@@ -785,7 +697,7 @@
       "D": "Hydrochloric acid for denaturation"
     },
     "answer": "A",
-    "explanation": "Matrix metalloproteinases require zinc for catalysis and are involved in remodeling the extracellular matrix."
+    "explanation": "Matrix metalloproteinases require zinc for catalysis. They participate in remodeling the extracellular matrix and are regulated by tissue inhibitors of metalloproteinases, or TIMPs. Their role differs from digestive serine proteases and lysosomal cathepsins. Zinc dependence is the key distinguishing feature in this question."
   },
   {
     "q": "Which system primarily degrades ubiquitin-tagged intracellular proteins in an ATP-dependent process?",
@@ -796,7 +708,7 @@
       "D": "Urea cycle"
     },
     "answer": "B",
-    "explanation": "The ubiquitin–proteasome system degrades proteins that have been covalently tagged with ubiquitin, using ATP to unfold and process the target protein."
+    "explanation": "The ubiquitin–proteasome system primarily degrades intracellular proteins that have been tagged with ubiquitin. This degradation requires ATP, especially to unfold proteins and move them into the proteasome. Lysosomes can degrade proteins through autophagy, but ubiquitin-tagged cytosolic proteins are classically directed to the proteasome. The urea cycle and γ-glutamyl cycle are not protein degradation systems."
   },
   {
     "q": "Autophagy contributes to amino acid homeostasis by:",
@@ -807,7 +719,7 @@
       "D": "Transporting amino acids into the blood through VLDL particles"
     },
     "answer": "A",
-    "explanation": "Autophagy encloses portions of the cytoplasm in vesicles that fuse with lysosomes, where cathepsins degrade proteins into amino acids."
+    "explanation": "Autophagy supports amino acid homeostasis by packaging cytoplasmic components into vesicles that fuse with lysosomes. Lysosomal cathepsins then degrade proteins into amino acids, which re-enter the intracellular amino acid pool. This process is especially important during starvation because cells can recycle internal components to support essential protein synthesis and energy needs."
   },
   {
     "q": "During starvation, autophagy is favored because low-energy conditions activate AMPK, which:",
@@ -818,7 +730,7 @@
       "D": "Converts ubiquitin into glutathione for cysteine salvage"
     },
     "answer": "B",
-    "explanation": "Under low-energy conditions, AMPK stimulates TSC1/TSC2, which converts Rheb-GTP to Rheb-GDP. This inactivates mTOR, promoting autophagy and reducing protein synthesis."
+    "explanation": "During starvation, low energy activates AMPK. AMPK stimulates the TSC1/TSC2 complex, which inactivates Rheb by converting Rheb-GTP to Rheb-GDP. Because active Rheb stimulates mTOR, Rheb inactivation suppresses mTOR. Low mTOR activity reduces protein synthesis and favors autophagy. In contrast, insulin and growth factors activate Akt, which keeps mTOR active and suppresses autophagy."
   },
   {
     "q": "Ubiquitin marks intracellular proteins for degradation primarily by attaching to which amino acid residue on target proteins?",
@@ -829,7 +741,7 @@
       "D": "Glycine"
     },
     "answer": "B",
-    "explanation": "Ubiquitin is attached to lysine residues on target proteins, often forming polyubiquitin chains that signal proteasomal degradation."
+    "explanation": "Ubiquitin attaches primarily to lysine residues on target proteins. Repeated addition of ubiquitin molecules forms a polyubiquitin chain, which serves as a degradation signal for the proteasome. This covalent tagging system allows selective removal of intracellular proteins. Lysine is therefore central to ubiquitin-mediated protein turnover."
   },
   {
     "q": "Which enzyme in the ubiquitin conjugation system uses ATP to activate ubiquitin and attach it to its own sulfhydryl group?",
@@ -840,7 +752,7 @@
       "D": "20S proteasome"
     },
     "answer": "A",
-    "explanation": "E1, the ubiquitin-activating enzyme, uses ATP to activate ubiquitin and attach it to its own sulfhydryl group."
+    "explanation": "E1, the ubiquitin-activating enzyme, uses ATP to activate ubiquitin and attaches it to its own sulfhydryl group. This is the first step in the ubiquitin conjugation pathway. Ubiquitin is then transferred to E2, and E3 helps transfer ubiquitin to the correct target protein. E1 provides activation, but E3 mainly provides substrate specificity."
   },
   {
     "q": "Which component of the ubiquitin conjugation system primarily provides substrate specificity by binding the target protein?",
@@ -851,7 +763,7 @@
       "D": "PA200 regulator"
     },
     "answer": "C",
-    "explanation": "E3 ubiquitin ligase binds the target protein and E2, giving the system substrate specificity and transferring ubiquitin to the target."
+    "explanation": "E3 ubiquitin ligase provides substrate specificity because it binds both the E2-ubiquitin complex and the target protein. This determines which proteins are selected for ubiquitination and degradation. Because E3 ligases control substrate selection, their dysregulation can have major cellular consequences, including abnormal cell cycle control and cancer development."
   },
   {
     "q": "Polyubiquitination of a protein generally indicates that the protein is:",
@@ -862,7 +774,7 @@
       "D": "Secreted through VLDL particles"
     },
     "answer": "B",
-    "explanation": "Polyubiquitin chains mark proteins for recognition and degradation by the proteasome."
+    "explanation": "Polyubiquitination generally marks a protein for degradation by the proteasome. A chain of ubiquitin molecules acts like a molecular tag that tells the proteasome which proteins should be destroyed. This process helps remove damaged, misfolded, short-lived, or regulatory proteins. After degradation, ubiquitin is recycled and amino acids return to the intracellular pool."
   },
   {
     "q": "ATP is required in proteasomal degradation mainly to:",
@@ -873,7 +785,7 @@
       "D": "Transport amino acids through the hepatic portal vein"
     },
     "answer": "C",
-    "explanation": "ATP is used to unfold and denature ubiquitin-tagged proteins so they can be fed into the proteasome for degradation."
+    "explanation": "ATP is required in proteasomal degradation mainly to unfold and feed ubiquitin-tagged proteins into the proteasome. The proteasome is a large proteolytic complex, and proteins usually must be unfolded before they can pass into its catalytic core. ATP is also involved in ubiquitin activation earlier in the pathway, but this item specifically asks about proteasomal degradation."
   },
   {
     "q": "Proteins containing PEST sequences generally have short half-lives because they are commonly targeted for:",
@@ -884,7 +796,7 @@
       "D": "Intestinal pinocytosis"
     },
     "answer": "B",
-    "explanation": "PEST sequences, rich in proline, glutamate, serine, and threonine, are associated with short protein half-lives and targeting through the ubiquitin–proteasome system."
+    "explanation": "PEST sequences are regions rich in proline, glutamate, serine, and threonine. Proteins containing PEST sequences often have short half-lives and are commonly targeted for degradation through the ubiquitin–proteasome system. These sequences help cells rapidly remove regulatory proteins when they are no longer needed, allowing tight control of cellular processes."
   },
   {
     "q": "Dysregulation of E3 ligases is associated with cancer mainly because these enzymes may affect proteins involved in:",
@@ -895,7 +807,7 @@
       "D": "Bicarbonate neutralization"
     },
     "answer": "A",
-    "explanation": "E3 ligases regulate degradation of proteins involved in cell cycle control and apoptosis. Dysregulation can contribute to uncontrolled cell growth and cancer."
+    "explanation": "E3 ligases help determine which proteins are degraded. Many target proteins regulate the cell cycle and apoptosis. If E3 ligases are dysregulated, proteins that should be degraded may persist, or protective proteins may be destroyed too quickly. This can contribute to uncontrolled cell growth and cancer. Thus, E3 ligase function is closely linked to cellular regulation."
   },
   {
     "q": "The γ-glutamyl cycle is now understood to function mainly in:",
@@ -906,7 +818,7 @@
       "D": "Proteasomal degradation of misfolded proteins"
     },
     "answer": "B",
-    "explanation": "Although once thought to be central for amino acid transport, the γ-glutamyl cycle is now mainly linked to glutathione maintenance and cysteine salvage."
+    "explanation": "The γ-glutamyl cycle was once thought to play a broad role in amino acid transport, but it is now mainly associated with glutathione maintenance and cysteine salvage. It helps process glutathione-related intermediates and supports intracellular glutathione levels. Many tissues lack all the enzymes needed for the complete cycle, limiting its role as a universal amino acid transport mechanism."
   },
   {
     "q": "Glutathione is composed of which three amino acid residues?",
@@ -917,7 +829,7 @@
       "D": "Valine, leucine, and isoleucine"
     },
     "answer": "A",
-    "explanation": "Glutathione is a tripeptide composed of glutamate, cysteine, and glycine."
+    "explanation": "Glutathione is a tripeptide made of glutamate, cysteine, and glycine. It is written as γ-glutamyl-cysteinyl-glycine because glutamate forms a unique γ-glutamyl bond. Glutathione is important for antioxidant defense, detoxification reactions, and protection of red blood cells from oxidative damage. Cysteine availability is often important for glutathione synthesis."
   },
   {
     "q": "The enzyme that cleaves the unique γ-glutamyl bond in glutathione is:",
@@ -928,7 +840,7 @@
       "D": "Carboxypeptidase B"
     },
     "answer": "B",
-    "explanation": "Transpeptidase cleaves the unique γ-glutamyl bond in glutathione and participates in the γ-glutamyl cycle."
+    "explanation": "Transpeptidase cleaves the unique γ-glutamyl bond in glutathione. This is important because the γ-glutamyl bond is not cleaved by ordinary proteases. The enzyme participates in the γ-glutamyl cycle, especially in tissues such as the intestine and kidney. Its action helps form γ-glutamyl amino acid intermediates and contributes to glutathione metabolism."
   },
   {
     "q": "Glutathione protects cells, especially red blood cells, primarily by:",
@@ -939,7 +851,7 @@
       "D": "Converting amino acids into VLDL"
     },
     "answer": "B",
-    "explanation": "Glutathione protects cells by reducing oxidants such as hydrogen peroxide, forming oxidized glutathione in the process."
+    "explanation": "Glutathione protects cells by reducing oxidants such as hydrogen peroxide. In doing so, reduced glutathione becomes oxidized glutathione, a disulfide-linked dimer. This antioxidant function is especially important in red blood cells, which are exposed to oxygen and oxidative stress but lack mitochondria and depend strongly on protective reducing systems."
   },
   {
     "q": "In the fed state, amino acids reaching the liver are used for synthesis of proteins, especially:",
@@ -950,7 +862,7 @@
       "D": "Bile pigments and bilirubin only"
     },
     "answer": "A",
-    "explanation": "In the fed state, amino acids arriving at the liver are used to synthesize proteins, particularly blood proteins such as serum albumin."
+    "explanation": "In the fed state, amino acids reaching the liver are used to synthesize proteins, especially blood proteins such as serum albumin. Albumin is important for maintaining plasma oncotic pressure and transporting various substances in the blood. If amino acids exceed the need for protein synthesis, their carbon skeletons may be converted to glucose, glycogen, or triacylglycerols."
   },
   {
     "q": "During fasting, muscle releases amino acids, and some nitrogen is transported in the blood mainly in the form of:",
@@ -961,7 +873,7 @@
       "D": "Glycogen and triacylglycerol"
     },
     "answer": "A",
-    "explanation": "During fasting, nitrogen from muscle amino acid metabolism is transported mainly as alanine and glutamine."
+    "explanation": "During fasting, muscle protein breakdown releases amino acids. Some nitrogen is transported in the blood mainly as alanine and glutamine. Alanine carries nitrogen and carbon to the liver, where it can support gluconeogenesis and urea synthesis. Glutamine carries nitrogen to tissues such as the kidney and gut. These transport forms help move nitrogen safely between organs."
   },
   {
     "q": "In the kidney during fasting, glutamine contributes to acid-base balance because it releases:",
@@ -972,7 +884,7 @@
       "D": "Pepsin into the stomach"
     },
     "answer": "A",
-    "explanation": "In the kidney, glutamine releases ammonia into the urine. The ammonia can bind protons and help with acid-base balance."
+    "explanation": "In the kidney during fasting, glutamine releases ammonia into the urine. Ammonia can bind hydrogen ions and form ammonium, helping excrete acid and maintain acid-base balance. This is especially important during acidosis. The kidney can also convert glutamine carbon skeletons into other amino acids such as alanine and serine, depending on metabolic conditions."
   },
   {
     "q": "In the fasting state, alanine and other amino acids enter the liver, where their nitrogen is converted to urea while their carbon skeletons are converted mainly to:",
@@ -983,10 +895,11 @@
       "D": "Pepsin and trypsin"
     },
     "answer": "A",
-    "explanation": "During fasting, amino acid nitrogen is converted to urea in the liver, while carbon skeletons are converted to glucose and ketone bodies for use by other tissues."
+    "explanation": "In fasting, alanine and other amino acids enter the liver. Their nitrogen is converted to urea for excretion, while their carbon skeletons are converted mainly to glucose and ketone bodies. Glucose supports tissues such as brain and red blood cells, while ketone bodies can be used by tissues such as muscle and kidney. This reflects the liver’s central role in fasting metabolism."
   }
 ];
 
+    let questions = shuffleQuestions(questionBank);
     let currentIndex = 0;
     let selectedAnswer = null;
     let userAnswers = new Array(questions.length).fill(null);
@@ -1010,6 +923,15 @@
     const finalMessage = document.getElementById("finalMessage");
     const restartBtn = document.getElementById("restartBtn");
     const reviewList = document.getElementById("reviewList");
+
+    function shuffleQuestions(items) {
+      const shuffled = items.map(item => ({ ...item }));
+      for (let i = shuffled.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+      }
+      return shuffled;
+    }
 
     function getScore() {
       return userAnswers.reduce((score, ans, idx) => score + (ans === questions[idx].answer ? 1 : 0), 0);
@@ -1154,6 +1076,7 @@
     }
 
     function restartQuiz() {
+      questions = shuffleQuestions(questionBank);
       currentIndex = 0;
       selectedAnswer = null;
       userAnswers = new Array(questions.length).fill(null);
